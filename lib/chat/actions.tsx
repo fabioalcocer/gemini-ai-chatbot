@@ -164,103 +164,103 @@ async function submitUserMessage(content: string) {
       const result = await experimental_streamText({
         model: google.generativeAI('models/gemini-1.0-pro-001'),
         temperature: 0,
-        tools: {
-          listDestinations: {
-            description: 'List destination cities, max 5.',
-            parameters: z.object({
-              destinations: z.array(
-                z
-                  .string()
-                  .describe(
-                    'List of destination cities. Include rome as one of the cities.'
-                  )
-              )
-            })
-          },
-          showFlights: {
-            description:
-              "List available flights in the UI. List 3 that match user's query.",
-            parameters: z.object({
-              departingCity: z.string(),
-              arrivalCity: z.string(),
-              departingAirport: z.string().describe('Departing airport code'),
-              arrivalAirport: z.string().describe('Arrival airport code'),
-              date: z
-                .string()
-                .describe(
-                  "Date of the user's flight, example format: 6 April, 1998"
-                )
-            })
-          },
-          showSeatPicker: {
-            description:
-              'Show the UI to choose or change seat for the selected flight.',
-            parameters: z.object({
-              departingCity: z.string(),
-              arrivalCity: z.string(),
-              flightCode: z.string(),
-              date: z.string()
-            })
-          },
-          showHotels: {
-            description: 'Show the UI to choose a hotel for the trip.',
-            parameters: z.object({})
-          },
-          checkoutBooking: {
-            description:
-              'Show the UI to purchase/checkout a flight and hotel booking.',
-            parameters: z.object({})
-          },
-          showBoardingPass: {
-            description: "Show user's imaginary boarding pass.",
-            parameters: z.object({
-              airline: z.string(),
-              arrival: z.string(),
-              departure: z.string(),
-              departureTime: z.string(),
-              arrivalTime: z.string(),
-              price: z.number(),
-              seat: z.string(),
-              date: z
-                .string()
-                .describe('Date of the flight, example format: 6 April, 1998'),
-              gate: z.string()
-            })
-          },
-          showFlightStatus: {
-            description:
-              'Get the current status of imaginary flight by flight number and date.',
-            parameters: z.object({
-              flightCode: z.string(),
-              date: z.string(),
-              departingCity: z.string(),
-              departingAirport: z.string(),
-              departingAirportCode: z.string(),
-              departingTime: z.string(),
-              arrivalCity: z.string(),
-              arrivalAirport: z.string(),
-              arrivalAirportCode: z.string(),
-              arrivalTime: z.string()
-            })
-          }
-        },
-        system: `\
-      You are a friendly assistant that helps the user with booking flights to destinations that are based on a list of books. You can you give travel recommendations based on the books, and will continue to help the user book a flight to their destination.
+      //   tools: {
+      //     listDestinations: {
+      //       description: 'List destination cities, max 5.',
+      //       parameters: z.object({
+      //         destinations: z.array(
+      //           z
+      //             .string()
+      //             .describe(
+      //               'List of destination cities. Include rome as one of the cities.'
+      //             )
+      //         )
+      //       })
+      //     },
+      //     showFlights: {
+      //       description:
+      //         "List available flights in the UI. List 3 that match user's query.",
+      //       parameters: z.object({
+      //         departingCity: z.string(),
+      //         arrivalCity: z.string(),
+      //         departingAirport: z.string().describe('Departing airport code'),
+      //         arrivalAirport: z.string().describe('Arrival airport code'),
+      //         date: z
+      //           .string()
+      //           .describe(
+      //             "Date of the user's flight, example format: 6 April, 1998"
+      //           )
+      //       })
+      //     },
+      //     showSeatPicker: {
+      //       description:
+      //         'Show the UI to choose or change seat for the selected flight.',
+      //       parameters: z.object({
+      //         departingCity: z.string(),
+      //         arrivalCity: z.string(),
+      //         flightCode: z.string(),
+      //         date: z.string()
+      //       })
+      //     },
+      //     showHotels: {
+      //       description: 'Show the UI to choose a hotel for the trip.',
+      //       parameters: z.object({})
+      //     },
+      //     checkoutBooking: {
+      //       description:
+      //         'Show the UI to purchase/checkout a flight and hotel booking.',
+      //       parameters: z.object({})
+      //     },
+      //     showBoardingPass: {
+      //       description: "Show user's imaginary boarding pass.",
+      //       parameters: z.object({
+      //         airline: z.string(),
+      //         arrival: z.string(),
+      //         departure: z.string(),
+      //         departureTime: z.string(),
+      //         arrivalTime: z.string(),
+      //         price: z.number(),
+      //         seat: z.string(),
+      //         date: z
+      //           .string()
+      //           .describe('Date of the flight, example format: 6 April, 1998'),
+      //         gate: z.string()
+      //       })
+      //     },
+      //     showFlightStatus: {
+      //       description:
+      //         'Get the current status of imaginary flight by flight number and date.',
+      //       parameters: z.object({
+      //         flightCode: z.string(),
+      //         date: z.string(),
+      //         departingCity: z.string(),
+      //         departingAirport: z.string(),
+      //         departingAirportCode: z.string(),
+      //         departingTime: z.string(),
+      //         arrivalCity: z.string(),
+      //         arrivalAirport: z.string(),
+      //         arrivalAirportCode: z.string(),
+      //         arrivalTime: z.string()
+      //       })
+      //     }
+      //   },
+      //   system: `\
+      // You are a friendly assistant that helps the user with booking flights to destinations that are based on a list of books. You can you give travel recommendations based on the books, and will continue to help the user book a flight to their destination.
   
-      The date today is ${format(new Date(), 'd LLLL, yyyy')}. 
-      The user's current location is San Francisco, CA, so the departure city will be San Francisco and airport will be San Francisco International Airport (SFO). The user would like to book the flight out on May 12, 2024.
+      // The date today is ${format(new Date(), 'd LLLL, yyyy')}. 
+      // The user's current location is San Francisco, CA, so the departure city will be San Francisco and airport will be San Francisco International Airport (SFO). The user would like to book the flight out on May 12, 2024.
 
-      List United Airlines flights only.
+      // List United Airlines flights only.
       
-      Here's the flow: 
-        1. List holiday destinations based on a collection of books.
-        2. List flights to destination.
-        3. Choose a flight.
-        4. Choose a seat.
-        5. Choose hotel
-        6. Purchase booking.
-        7. Show boarding pass.
-      `,
+      // Here's the flow: 
+      //   1. List holiday destinations based on a collection of books.
+      //   2. List flights to destination.
+      //   3. Choose a flight.
+      //   4. Choose a seat.
+      //   5. Choose hotel
+      //   6. Purchase booking.
+      //   7. Show boarding pass.
+      // `,
         messages: [...history]
       })
 

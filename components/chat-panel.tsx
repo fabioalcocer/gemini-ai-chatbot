@@ -35,18 +35,18 @@ export function ChatPanel({
   const { submitUserMessage } = useActions()
   const [shareDialogOpen, setShareDialogOpen] = React.useState(false)
 
-  const exampleMessages = [
-    {
-      heading: 'List flights flying from',
-      subheading: 'San Francisco to Rome today',
-      message: `List flights flying from San Francisco to Rome today`
-    },
-    {
-      heading: 'What is the status',
-      subheading: 'of flight BA142?',
-      message: 'What is the status of flight BA142?'
-    }
-  ]
+  // const exampleMessages = [
+  //   {
+  //     heading: 'List flights flying from',
+  //     subheading: 'San Francisco to Rome today',
+  //     message: `List flights flying from San Francisco to Rome today`
+  //   },
+  //   {
+  //     heading: 'What is the status',
+  //     subheading: 'of flight BA142?',
+  //     message: 'What is the status of flight BA142?'
+  //   }
+  // ]
 
   return (
     <div className="fixed inset-x-0 bg-white/90 bottom-0 w-full duration-300 ease-in-out peer-[[data-state=open]]:group-[]:lg:pl-[250px] peer-[[data-state=open]]:group-[]:xl:pl-[300px] dark:from-10%">
@@ -56,7 +56,7 @@ export function ChatPanel({
       /> */}
 
       <div className="mx-auto sm:max-w-2xl sm:px-4">
-        <div className="mb-4 grid sm:grid-cols-2 gap-2 sm:gap-4 px-4 sm:px-0">
+        {/* <div className="mb-4 grid sm:grid-cols-2 gap-2 sm:gap-4 px-4 sm:px-0">
           {messages.length === 0 &&
             exampleMessages.map((example, index) => (
               <div
@@ -90,7 +90,7 @@ export function ChatPanel({
                 </div>
               </div>
             ))}
-        </div>
+        </div> */}
 
         {messages?.length >= 2 ? (
           <div className="flex h-fit items-center justify-center">
